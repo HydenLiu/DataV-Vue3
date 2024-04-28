@@ -45,9 +45,7 @@ export default defineConfig({
   },
   plugins: [
     compileStyledComponentsPlugin(STYLED_PLACEHOLDER),
-    vue({
-      reactivityTransform: true,
-    }),
+    vue(),
     vueJsx(),
     dts({
       include: ['src'],

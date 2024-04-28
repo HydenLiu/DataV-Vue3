@@ -32,7 +32,7 @@ const sectorAngle = Math.PI / 3;
 const ringNum = 3;
 const ringWidth = 1;
 
-const calcPathColor = (color, segment) => {
+const calcPathColor = (color: string, segment: number) => {
   const colorGap = 100 / (segment - 1);
 
   return new Array(segment).fill(color).map((_, i) => fade(color, 100 - i * colorGap));
@@ -52,7 +52,7 @@ function createDecoration12Props() {
   };
 }
 
-const getCircleRadianPoint = (x, y, radius, radian) => {
+const getCircleRadianPoint = (x: number, y: number, radius: number, radian: number) => {
   return [x + Math.cos(radian) * radius, y + Math.sin(radian) * radius];
 };
 
@@ -75,8 +75,8 @@ const calcPathD = ({
   let lastEndPoints = getCircleRadianPoint(x, y, r, startAngle);
 
   return new Array(segment).fill('').map((_, i) => {
-    const endPoints = getCircleRadianPoint(x, y, r, startAngle - (i + 1) * angleGap).map((_) =>
-      _.toFixed(5)
+    const endPoints = getCircleRadianPoint(x, y, r, startAngle - (i + 1) * angleGap).map(
+      (_) => +_.toFixed(5)
     );
     const d = `M${lastEndPoints.join(',')} A${r}, ${r} 0 0 0 ${endPoints.join(',')}`;
     lastEndPoints = endPoints;

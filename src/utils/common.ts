@@ -2,12 +2,12 @@ import { merge } from 'lodash-es';
 
 import type { Point } from '../types/common';
 import type { App, Plugin } from 'vue';
-import type { PropType } from 'vue';
+import type { PropType, DefineComponent } from 'vue';
 
 export function withInstall<T>(comp: T) {
   const c = comp as any;
   c.install = function (app: App) {
-    app.component(c.displayName || c.name, comp);
+    app.component(c.displayName || c.name, comp as DefineComponent);
   };
 
   return comp as T & Plugin;

@@ -1,7 +1,16 @@
 import { uniqueId } from 'lodash-es';
 import { onMounted, onUnmounted, defineComponent } from 'vue';
 
-import type { Component, FunctionalComponent } from 'vue';
+import type {
+  Component,
+  FunctionalComponent,
+  HTMLAttributes,
+  ReservedProps,
+  SetupContext,
+  SVGAttributes,
+} from 'vue';
+
+type StyleProp = HTMLAttributes & ReservedProps;
 
 /**
  * StyledComponents CSS In JS
@@ -68,9 +77,9 @@ function StyledComponents(classNamePrefix: string) {
 
       const appendStyle = (className: string) => {
         styleEle.innerHTML = createStyle(style, className);
-        document.querySelector('head').appendChild(styleEle);
+        document.querySelector('head')?.appendChild(styleEle);
       };
-      const removeStyle = () => document.querySelector('head').removeChild(styleEle);
+      const removeStyle = () => document.querySelector('head')?.removeChild(styleEle);
 
       type Props = (T extends Component<infer P> ? P : never) & { class?: string };
 
@@ -79,7 +88,7 @@ function StyledComponents(classNamePrefix: string) {
         const id = uniqueId('style');
 
         const StyledFC = /*#__PURE__*/ defineComponent<Props>({
-          setup(props, { slots }) {
+          setup(props, ctx) {
             onMounted(() => {
               // 样式加载过就不再重复加载
               if (getRenderRefCount(id) === 0) {
@@ -104,7 +113,7 @@ function StyledComponents(classNamePrefix: string) {
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore
               <StyledComponentWithType {...props} class={fullClassName}>
-                {slots?.default?.()}
+                {ctx.slots?.default?.()}
               </StyledComponentWithType>
             );
           },
@@ -118,10 +127,16 @@ function StyledComponents(classNamePrefix: string) {
   styled.setClassNamePrefix = setClassNamePrefix;
   styled.getClassNameForBind = getClassNameForBind;
 
-  styled.span = styled((props, { slots }) => <span {...props}>{slots?.default()}</span>);
-  styled.div = styled((props, { slots }) => <div {...props}>{slots?.default()}</div>);
-  styled.img = styled((props) => <img {...props} />);
-  styled.svg = styled((props, { slots }) => <svg {...props}>{slots?.default()}</svg>);
+  styled.span = styled((props: StyleProp, { slots }: SetupContext) => (
+    <span {...props}>{slots?.default?.()}</span>
+  ));
+  styled.div = styled((props: StyleProp, { slots }: SetupContext) => (
+    <div {...props}>{slots?.default?.()}</div>
+  ));
+  styled.img = styled((props: StyleProp) => <img {...props} />);
+  styled.svg = styled((props: StyleProp & SVGAttributes, { slots }: SetupContext) => (
+    <svg {...props}>{slots?.default?.()}</svg>
+  ));
 
   return styled;
 }

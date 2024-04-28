@@ -1,12 +1,40 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
     "baseUrl": "./",
-    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "strict": true,
+    "strictNullChecks": true,
     "jsx": "preserve",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "module": "commonjs",
+    "moduleResolution": "Node",
+    "declaration": true,
+    "forceConsistentCasingInFileNames": true,
+    "composite": true,
+    "target": "ES6",
+    "types": [
+      "vue/jsx"
+    ],
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "lib": [
+      "ESNext",
+      "DOM",
+      "DOM.Iterable"
+    ],
   },
-  "include": ["./**/*.*", "./.dev/*.*", "./docs/.vuepress/*.*"],
-  "exclude": ["node_modules", "scripts/dev/dev-env", "docs/guide/refreshLayoutSizeDemo.tsx", "es"]
+  "include": [
+    "./**/*.*",
+    "./.dev/*.*",
+    "./docs/.vuepress/*.*"
+  ],
+  "exclude": [
+    "node_modules",
+    "scripts/dev/dev-env",
+    "docs/guide/refreshLayoutSizeDemo.tsx",
+    "es",
+    "./**/*.js",
+  ]
 }

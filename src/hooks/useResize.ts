@@ -38,7 +38,7 @@ function updateDomSize(dom: HTMLElement, target: { width: number; height: number
   target.height = clientHeight;
 }
 
-function getRefDom(ref: HTMLElement | ComponentPublicInstance): HTMLElement {
+function getRefDom(ref: HTMLElement | ComponentPublicInstance): HTMLElement | null {
   if (isElement(ref)) {
     return ref as HTMLElement;
   }
@@ -60,6 +60,9 @@ export function useResize() {
   });
 
   const handleRomSizeChange: RefreshLayoutSize = () => {
+    if (!domRef.value) {
+      return;
+    }
     updateDomSize(domRef.value, domSize);
   };
 
@@ -81,6 +84,9 @@ export function useResize() {
   onMounted(() => {
     handleRomSizeChange();
 
+    if (!domRef.value) {
+      return;
+    }
     const observer = observerDomResize(domRef.value, debouncedDomSizeChangeHandler);
     window.addEventListener('resize', debouncedDomSizeChangeHandler);
 

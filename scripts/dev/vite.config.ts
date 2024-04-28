@@ -11,13 +11,7 @@ export default defineConfig({
   server: {
     open: true,
   },
-  plugins: [
-    compileStyledComponentsPlugin(STYLED_PLACEHOLDER),
-    vue({
-      reactivityTransform: true,
-    }),
-    vueJsx(),
-  ],
+  plugins: [compileStyledComponentsPlugin(STYLED_PLACEHOLDER), vue(), vueJsx()],
   define: {
     __STYLED_PLACEHOLDER__: `"${STYLED_PLACEHOLDER}"`,
   },

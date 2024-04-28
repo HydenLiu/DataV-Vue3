@@ -15,7 +15,7 @@ function createDecoration2Props() {
   };
 }
 
-function calcSVGData(reverse, width, height) {
+function calcSVGData(reverse: boolean, width: number, height: number) {
   if (reverse) {
     return {
       width: 1,
