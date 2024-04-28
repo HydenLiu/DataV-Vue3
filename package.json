@@ -13,7 +13,7 @@
     "build:es": "vite build --config scripts/build/vite.config.ts",
     "build:umd": "vite build --config scripts/build/vite.config.umd.ts",
     "check": "yarn lint && yarn lint:type && yarn lint:format",
-    "lint": "eslint --fix --ext .ts,.tsx src",
+    "lint": "eslint --fix \"src/**/*.{ts,tsx,js}\"",
     "lint:type": "ts-node docs/.vuepress/init && tsc --project ./tsconfig.json --noEmit",
     "lint:format": "prettier --check \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.less\"",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.less\"",
