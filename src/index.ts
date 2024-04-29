@@ -59,7 +59,9 @@ export default function DataV(app: App, { classNamePrefix }: { classNamePrefix?:
     Loading,
   ];
 
-  DataVComponents.forEach((CMP) => app.component(CMP.name, CMP));
+  DataVComponents.forEach((CMP) => {
+    if (CMP.name) app.component(CMP.name, CMP);
+  });
 
   if (classNamePrefix) {
     setClassNamePrefix(classNamePrefix);

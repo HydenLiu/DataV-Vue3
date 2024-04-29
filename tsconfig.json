@@ -15,10 +15,13 @@
     "composite": true,
     "target": "ES6",
     "types": [
-      "vue/jsx"
+      "vue/jsx",
+      "node"
     ],
+    "allowJs": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
+    "skipLibCheck": true,
     "lib": [
       "ESNext",
       "DOM",
@@ -26,15 +29,19 @@
     ],
   },
   "include": [
-    "./**/*.*",
+    "env.d.ts",
+    "src/**/*",
+    "src/**/*.ts",
+    "src/**/*.tsx",
     "./.dev/*.*",
-    "./docs/.vuepress/*.*"
+    "./docs/**/*.*",
+    "./scripts/**/*.*",
+    "./package.json"
   ],
   "exclude": [
-    "node_modules",
     "scripts/dev/dev-env",
     "docs/guide/refreshLayoutSizeDemo.tsx",
     "es",
-    "./**/*.js",
+    "node_modules/"
   ]
 }

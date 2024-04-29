@@ -22,7 +22,7 @@ if (!validVersionType.includes(type as VersionType)) {
   process.exit(1);
 }
 
-const VersionGenerateMap: Record<VersionType, (version: SemVer) => SemVer> = {
+const VersionGenerateMap: Record<string, (version: SemVer) => SemVer> = {
   [VersionType.TEST]: (version: SemVer) => {
     version.prerelease = ['test', Date.now()];
     return version;
@@ -36,7 +36,9 @@ async function versionGenerator() {
     (res) => res.map((r) => JSON.parse(r.toString()))
   );
 
-  pkg.version = VersionGenerateMap[type](semver.parse(pkg.version)).format();
+  if (type) {
+    pkg.version = VersionGenerateMap[type](semver.parse(pkg.version)!).format();
+  }
 
   const pkgJsonStr = prettier.format(JSON.stringify(pkg), {
     parser: 'json-stringify',

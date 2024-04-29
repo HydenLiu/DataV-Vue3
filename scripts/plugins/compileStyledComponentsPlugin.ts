@@ -21,7 +21,7 @@ export function compileStyledComponentsPlugin(styledPlaceholder: string) {
   return {
     name: 'compileStyledComponentsPlugin',
 
-    async transform(content, id) {
+    async transform(content: any, id: any) {
       if (!/tsx$/.test(id)) {
         return;
       }
@@ -29,19 +29,19 @@ export function compileStyledComponentsPlugin(styledPlaceholder: string) {
       const source = project.getSourceFile(id);
 
       if (fileMap.has(id) && fileMap.get(id) !== content) {
-        source.refreshFromFileSystemSync();
+        source!.refreshFromFileSystemSync();
       }
       fileMap.set(id, content);
 
       const needTransformNode: NoSubstitutionTemplateLiteral[] = [];
 
-      source.forEachDescendant((node) => {
+      source!.forEachDescendant((node) => {
         if (!node.isKind(SyntaxKind.NoSubstitutionTemplateLiteral)) {
           return;
         }
 
         const isStyledTemplate = node.getParentIf((parent) =>
-          parent.getChildAtIndex(0).getFullText().trim().startsWith('styled')
+          parent!.getChildAtIndex(0).getFullText().trim().startsWith('styled')
         );
         if (!isStyledTemplate) {
           return;
@@ -70,7 +70,7 @@ export function compileStyledComponentsPlugin(styledPlaceholder: string) {
       );
 
       return {
-        code: source.getFullText(),
+        code: source!.getFullText(),
         map: null,
       };
     },

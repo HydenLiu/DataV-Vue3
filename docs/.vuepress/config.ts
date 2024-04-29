@@ -45,7 +45,7 @@ export default defineUserConfig({
       },
     ],
     sidebar: {
-      '/guide/': ['/guide/index.md/', '/guide/borderBox.md', '/guide/decoration.md/'],
+      '/guide/': ['/guide/index.md', '/guide/borderBox.md', '/guide/decoration.md'],
     },
   }),
   bundler: viteBundler({

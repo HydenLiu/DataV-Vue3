@@ -1,6 +1,14 @@
 {
   "files.eol": "\n",
-  "cSpell.words": ["datav", "polyline", "vuepress", "execa", "jiaminghi", "dataview", "RGBA"],
+  "cSpell.words": [
+    "datav",
+    "polyline",
+    "vuepress",
+    "execa",
+    "jiaminghi",
+    "dataview",
+    "RGBA"
+  ],
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "typescript.tsdk": "./node_modules/typescript/lib",
@@ -14,5 +22,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "eslint.validate": ["javascript"]
+  "eslint.validate": [
+    "javascript"
+  ]
 }

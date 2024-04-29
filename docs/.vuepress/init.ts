@@ -15,7 +15,7 @@ async function init() {
   spinner.info('Building es output...');
 
   const buildProcess = execa('yarn', ['build:es'], { shell: true });
-  buildProcess.stdout.pipe(process.stdout);
+  buildProcess.stdout!.pipe(process.stdout);
   await buildProcess;
 
   spinner.succeed('Es output build successfully!');

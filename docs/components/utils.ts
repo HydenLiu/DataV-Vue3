@@ -6,5 +6,5 @@ export function copy(str: string) {
   inputEle.select();
   document.execCommand('copy');
 
-  inputEle.parentNode.removeChild(inputEle);
+  inputEle.parentNode?.removeChild(inputEle);
 }
