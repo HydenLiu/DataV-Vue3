@@ -2,7 +2,7 @@ import path from 'path';
 
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import * as glob from 'glob';
+import { sync } from 'glob';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 
@@ -11,12 +11,10 @@ import { STYLED_PLACEHOLDER } from '../config';
 import { compileStyledComponentsPlugin } from '../plugins/compileStyledComponentsPlugin';
 
 const entry = Object.fromEntries(
-  glob
-    .sync('src/**/*.{ts,tsx}')
-    .map((file) => [
-      path.relative('src', file.slice(0, file.length - path.extname(file).length)),
-      file,
-    ])
+  sync('src/**/*.{ts,tsx}').map((file) => [
+    path.relative('src', file.slice(0, file.length - path.extname(file).length)),
+    file,
+  ])
 );
 
 // eslint-disable-next-line
